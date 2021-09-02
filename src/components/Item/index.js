@@ -12,7 +12,6 @@ import axios from 'axios';
 import {colors, fonts} from '../../utils';
 import {ICInfo} from '../../assets';
 import {ICPlus} from '../../assets/icon';
-// import Modal from 'react-native-modal';
 
 const Item = ({kategori, cari}) => {
   const [item, setItem] = useState();
@@ -23,8 +22,6 @@ const Item = ({kategori, cari}) => {
       setItem(response.data.item);
     })
     .catch(err => console.log('err:', err));
-  // console.log(DATA);
-  // console.log(itemnya);
 
   const renderItem = ({item}) => {
     return (
@@ -40,26 +37,15 @@ const Item = ({kategori, cari}) => {
         <ICPlus
           style={styles.plus}
           onPress={() =>
-            Alert.alert(
-              item.nameItem,
-              `Masukkan ${item.nameItem} Ke Pesanan`,
-              [
-                {
-                  text: 'Tidak',
-                },
-                {
-                  text: 'Ya',
-                  onPress: () => Alert.alert('Berhasil Di Masukan'),
-                },
-              ],
-              // {
-              //   cancelable: true,
-              //   onDismiss: () =>
-              //     Alert.alert(
-              //       'This alert was dismissed by tapping outside of the alert dialog.',
-              //     ),
-              // },
-            )
+            Alert.alert(item.nameItem, `Masukkan ${item.nameItem} Ke Pesanan`, [
+              {
+                text: 'Tidak',
+              },
+              {
+                text: 'Ya',
+                onPress: () => Alert.alert('Berhasil Di Masukan'),
+              },
+            ])
           }
         />
         <View style={styles.textContainer}>

@@ -1,14 +1,22 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import {useSelector} from 'react-redux';
 
 const Cart = () => {
-    return (
-        <View>
-            <Text>Ini Halaman Cart</Text>
-        </View>
-    )
-}
+  const stateGolbal = useSelector(state => state);
+  // const dispatch = useDispatch();
 
-export default Cart
+  // const updateName = () => {
+  //   dispatch({type: 'SET_NAME', value: 'alfian'});
+  // };
 
-const styles = StyleSheet.create({})
+  return (
+    <View>
+      <Text>{stateGolbal}</Text>
+    </View>
+  );
+};
+
+export default Cart;
+
+const styles = StyleSheet.create({});
