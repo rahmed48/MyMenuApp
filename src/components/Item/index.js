@@ -10,11 +10,15 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import {colors, fonts} from '../../utils';
-import {ICInfo} from '../../assets';
-import {ICPlus} from '../../assets/icon';
+import {ICInfo, ICPlus} from '../../assets';
+import {connect, useDispatch} from 'react-redux';
 
 const Item = ({kategori, cari}) => {
   const [item, setItem] = useState();
+  // console.log(item);
+  const dispatch = useDispatch();
+
+  // const dispatch = useDispatch();
 
   axios
     .get('https://e-menus.herokuapp.com/api/v1/menu/item')
@@ -43,7 +47,11 @@ const Item = ({kategori, cari}) => {
               },
               {
                 text: 'Ya',
-                onPress: () => Alert.alert('Berhasil Di Masukan'),
+                onPress: () =>
+                  dispatch({
+                    type: 'ADD_TO_CART',
+                    payload: item ,
+                  }),
               },
             ])
           }
@@ -86,7 +94,7 @@ const Item = ({kategori, cari}) => {
   );
 };
 
-export default Item;
+export default connect()(Item);
 
 const styles = StyleSheet.create({
   itemContainer: {

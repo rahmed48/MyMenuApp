@@ -10,7 +10,7 @@ import {useSelector} from 'react-redux';
 const Tab = createBottomTabNavigator();
 
 const Router = () => {
-  const stateGlobal = useSelector(state => state);
+  const stateGlobal = useSelector(state => state.cartItems);
 
   if (stateGlobal.length > 0) {
     return (
