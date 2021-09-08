@@ -50,7 +50,8 @@ const Item = ({kategori, cari}) => {
                 onPress: () =>
                   dispatch({
                     type: 'ADD_TO_CART',
-                    payload: item ,
+                    payload: item,
+                    jumlah: 1,
                   }),
               },
             ])

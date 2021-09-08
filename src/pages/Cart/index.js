@@ -24,10 +24,14 @@ const Cart = () => {
   const count = useSelector(state => state.count);
 
   for (let i = 0; i < stateGlobal.length; i++) {
-    harga.push(stateGlobal[i].harga);
+    harga.push(stateGlobal[0][i].harga);
   }
   for (let i = 0; i < harga.length; i++) {
-    total.push(harga[i] * count);
+    for (let x = 0; x < stateGlobal.length; x++) {
+      const jumlah = stateGlobal[x];
+
+      total.push(harga[i] * jumlah);
+    }
   }
 
   const totalHarga = harga.reduce((val, nilaiSekarang) => {
@@ -82,7 +86,7 @@ const Cart = () => {
                           type: 'DECREMENT',
                           payload: item,
                         },
-                        console.log(item),
+                        // console.log(item),
                       )
                     }>
                     <ICDecrement />
@@ -93,13 +97,11 @@ const Cart = () => {
                   <TouchableOpacity
                     style={{marginTop: 7}}
                     onPress={() =>
-                      dispatch(
-                        {
-                          type: 'INCREMENT',
-                          payload: item,
-                        },
-                        console.log(item),
-                      )
+                      dispatch({
+                        type: 'INCREMENT',
+                        payload1: item,
+                        payload2: [item[0], item[1] + 1],
+                      })
                     }>
                     <ICIncrement />
                   </TouchableOpacity>

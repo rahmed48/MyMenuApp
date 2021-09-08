@@ -3,16 +3,16 @@ const initialState = {cartItems: []};
 const reducers = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_TO_CART':
-      const count = 1;
+      const count = action.jumlah;
       const item = action.payload;
       const existItem = state.cartItems.find(x => x[0]._id === item._id);
       if (existItem) {
         return {
           ...state,
-          // cartItems: [...state.cartItems, [null, +1]],
           cartItems: state.cartItems.map(x =>
             x[0]._id === existItem._id ? item : x,
           ),
+          // cartItems: [...state.cartItems, [null, +1]],
           // // cartItems: [...state.cartItems, state.count + 1],
         };
       } else {
@@ -29,9 +29,15 @@ const reducers = (state = initialState, action) => {
         ),
       };
     case 'INCREMENT':
+      const newItem = [...state.cartItems, action.payload2];
+      console.log(newItem);
       return {
         ...state,
-        cartItems: [...state.cartItems, [action.payload[1] + 1]],
+        cartItems: state.cartItems.filter(
+          cartItem => cartItem[0]._id !== action.payload1[0]._id,
+        ),
+        ...state,
+        cartItems: newItem,
       };
     // case 'DECREMENT':
     //   return {
